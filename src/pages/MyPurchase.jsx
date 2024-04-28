@@ -45,11 +45,11 @@ export default function MyPurchase() {
     }, [currentUserID]);
 
     return (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center overscroll-x-auto">
             <Navbar />
             <div className="pt-24">
                 <h1 className="font-Roboto font-bold text-2xl mb-3">Purchase History</h1>
-                <table className="border-separate border-spacing-10 border border-black rounded-md mb-6">
+                <table className="border-separate border-spacing-10 border border-black rounded-md mb-6 max-w-5xl">
                     <thead>
                         <tr>
                             
@@ -58,6 +58,8 @@ export default function MyPurchase() {
                             <th className=" font-Roboto font-semibold text-lg text-black">Variety</th>
                             <th className=" font-Roboto font-semibold text-lg text-black">Size</th>
                             <th className=" font-Roboto font-semibold text-lg text-black">Quantity</th>
+                            <th className=" font-Roboto font-semibold text-lg text-black">Price</th>
+                            <th className=" font-Roboto font-semibold text-lg text-black">Total</th>
                             <th className=" font-Roboto font-semibold text-lg text-black">Timestamp</th>
                             <th className=" font-Roboto font-semibold text-lg text-black">Status</th>
                         </tr>

@@ -25,7 +25,7 @@ export default function AdminPurchaseHistory() {
                         if (userDocSnapshot.exists() && shopitemDocSnapshot.exists()) {
                             const userData = userDocSnapshot.data();
                             const itemData = shopitemDocSnapshot.data();
-                            return { ...item, username: userData.username, productname: itemData.name, costperitem: itemData.price };
+                            return { ...item, username: userData.username, phone: userData.phoneNumber, barangay: userData.barangay, productname: itemData.name, costperitem: itemData.price };
                         }
                         return item;
 
@@ -78,23 +78,25 @@ export default function AdminPurchaseHistory() {
     };
 
     return (
-        <div>
+        <div className="overflow-x-auto">
             <Navbar />
             <div className="pt-28 pb-5 flex flex-col items-center w-screen">
                 <div>
                     <h2 className="font-Roboto font-semibold text-2xl mb-3">Purchase History (Admin)</h2>
-                    <table className="py-1 px-3 border-separate border-spacing-x-3 border-spacing-y-5 border border-black rounded-md mb-6">
+                    <table className="py-1 px-1 border-separate border-spacing-x-3 border-spacing-y-5 border border-black rounded-md mb-6 max-w-4xl overflow-x-auto">
                         <thead>
                             <tr>
-                                <th className="font-Roboto font-semibold text-base">Buyer</th>
-                                <th className="font-Roboto font-semibold text-base">Purchase ID</th>
-                                <th className="font-Roboto font-semibold text-base">Product Name</th>
-                                <th className="font-Roboto font-semibold text-base">Cost/Item</th>
-                                <th className="font-Roboto font-semibold text-base">Color</th>
-                                <th className="font-Roboto font-semibold text-base">Variety</th>
-                                <th className="font-Roboto font-semibold text-base">Quantity</th>
-                                <th className="font-Roboto font-semibold text-base">Total</th>
-                                <th className="font-Roboto font-semibold text-base">Timestamp</th>
+                                <th className="font-Roboto font-semibold text-sm">Buyer</th>
+                                <th className="font-Roboto font-semibold text-sm">Purchase ID</th>
+                                <th className="font-Roboto font-semibold text-sm">Barangay</th>
+                                <th className="font-Roboto font-semibold text-sm">Phone</th>
+                                <th className="font-Roboto font-semibold text-sm">Product Name</th>
+                                <th className="font-Roboto font-semibold text-sm">Cost/Item</th>
+                                <th className="font-Roboto font-semibold text-sm">Color</th>
+                                <th className="font-Roboto font-semibold text-sm">Variety</th>
+                                <th className="font-Roboto font-semibold text-sm">Quantity</th>
+                                <th className="font-Roboto font-semibold text-sm">Total</th>
+                                <th className="font-Roboto font-semibold text-sm">Timestamp</th>
 
                                 <th className="font-Roboto font-semibold text-base">Status</th>
                                 <th className="font-Roboto font-semibold text-base">Action</th>
@@ -121,6 +123,8 @@ export default function AdminPurchaseHistory() {
                                                     </>
                                                 )}
                                             </td>
+                                            <td className="text-center font-Roboto font-normal text-sm">{item.barangay}</td>
+                                            <td className="text-center font-Roboto font-normal text-sm">{item.phone}</td>
                                             <td className="text-center font-Roboto font-normal text-sm">{item.productname}</td>
                                             <td className="text-center font-Roboto font-normal text-sm">₱{item.costperitem}</td>
                                             <td className="text-center font-Roboto font-normal text-sm">

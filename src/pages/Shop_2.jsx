@@ -6,6 +6,7 @@ import star_half from "../icons/star-half_2.svg";
 import star_empty from "../icons/star.svg";
 import round_check from "../icons/round_check.svg";
 import background from "../images/bg_2.jpg";
+import soldout from "../icons/sold.svg";
 import { useLocation } from "react-router-dom";
 import Comment from "../templates/Comment";
 import { doc, getDoc, collection, addDoc, setDoc } from "firebase/firestore";
@@ -180,10 +181,11 @@ export default function Shop_2(props) {
             <div className="flex flex-wrap flex-col items-start gap-x-3 gap-y-4 w-9/12 h-fit bg-red-100 p-10 border border-solid border-black shadow-custom">
               <div className="flex justify-between w-full">
                 <h1 className="font-Roboto font-extrabold text-2xl">{productData.name}</h1>
-                <div className="flex justify-center items-center gap-2 w-fit">
+                {productData.quantity > 0 ? <div className="flex justify-center items-center gap-2 w-fit">
                   <img className="w-8 h-8" src={round_check} alt="" />
                   <h2 className="font-Roboto font-semibold text-xl text-gray-800">In Stock</h2>
-                </div>
+                </div> :
+                  <div className="flex justify-end items-center gap-2 w-fit"><img className="w-14 h-10" src={soldout} /></div>}
               </div>
               <div className="flex flex-wrap gap-5 justify-start items-center w-full">
                 <h2 className=" font-Roboto text-xl font-bold text-deep-orange-700">P{productData.price}</h2>
@@ -198,47 +200,50 @@ export default function Shop_2(props) {
                     }
                   })}
                 </div>
-                <h2 className="ml-auto font-Roboto text-xl text-gray-800 font-bold">{productData.quantity} available</h2>
+                {productData.quantity > 0 ?
+                  <h2 className="ml-auto font-Roboto text-xl text-gray-800 font-bold">{productData.quantity} available</h2>
+                  : ""}
+
               </div>
 
               {productData.colorValues ?
-              productData.colorValues && productData.colorValues.length > 0 && (
-                <div>
-                  <h2 className="font-Roboto text-lg font-medium">Color</h2>
-                  <div className="mt-2 flex gap-2 flex-wrap">
-                    {productData.colorValues.map((color, index) => (
-                      <button
-                        key={index}
-                        value={color}
-                        className={`flex justify-center items-center w-10 h-10 rounded-full ${selectedColor === color ? "ring-2 ring-gray-900  dark:ring-gray-300" : ""
-                          }`}
-                        onClick={() => handleColorSelect(color)}
-                      >
-                        <div className={`w-10 h-10 p-1 rounded-full`} style={{ backgroundColor: color }}></div>
-                      </button>
-                    ))}
+                productData.colorValues && productData.colorValues.length > 0 && (
+                  <div>
+                    <h2 className="font-Roboto text-lg font-medium">Color</h2>
+                    <div className="mt-2 flex gap-2 flex-wrap">
+                      {productData.colorValues.map((color, index) => (
+                        <button
+                          key={index}
+                          value={color}
+                          className={`flex justify-center items-center w-10 h-10 rounded-full ${selectedColor === color ? "ring-2 ring-gray-900  dark:ring-gray-300" : ""
+                            }`}
+                          onClick={() => handleColorSelect(color)}
+                        >
+                          <div className={`w-10 h-10 p-1 rounded-full`} style={{ backgroundColor: color }}></div>
+                        </button>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ):""}
+                ) : ""}
 
-              {productData.sizes ? 
-              productData.sizes && productData.sizes.length > 0 && (
-                <div>
-                  <h2 className="mt-2 font-Roboto text-lg font-medium">Size</h2>
-                  <div className="flex gap-2 flex-wrap">
-                    {productData.sizes.map((size, index) => ( // Use map instead of Array constructor
-                      <button
-                        key={index}
-                        onClick={() => handleSizeSelect(size)} // Pass the size value to the handler
-                        className={`w-fit h-fit px-5 border border-solid border-black text-center shadow-custom-2 ${selectedSize === size ? "bg-gray-800 text-white shadow-sm" : "bg-white"}`}>
-                        {size}
-                      </button>
-                    ))}
+              {productData.sizes ?
+                productData.sizes && productData.sizes.length > 0 && (
+                  <div>
+                    <h2 className="mt-2 font-Roboto text-lg font-medium">Size</h2>
+                    <div className="flex gap-2 flex-wrap">
+                      {productData.sizes.map((size, index) => ( // Use map instead of Array constructor
+                        <button
+                          key={index}
+                          onClick={() => handleSizeSelect(size)} // Pass the size value to the handler
+                          className={`w-fit h-fit px-5 border border-solid border-black text-center shadow-custom-2 ${selectedSize === size ? "bg-gray-800 text-white shadow-sm" : "bg-white"}`}>
+                          {size}
+                        </button>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ):""}
+                ) : ""}
 
-              {productData.totalVarieties ? 
+              {productData.totalVarieties ?
                 productData.totalVarieties && productData.totalVarieties > 0 && (
                   <div>
                     <h2 className="mt-2 font-Roboto text-lg font-medium">Variety</h2>
@@ -253,7 +258,7 @@ export default function Shop_2(props) {
                       ))}
                     </div>
                   </div>
-                ):""}
+                ) : ""}
 
 
 
