@@ -43,7 +43,7 @@ const AuthDetails = () => {
             const userDoc = await getDoc(doc(DB, "users", uid));
             if (userDoc.exists()) {
                 setUsername(userDoc.data().username);
-                console.log("USERDOC",userDoc.data())
+                console.log("USERDOC", userDoc.data())
                 setLevel(userDoc.data().level);
             } else {
                 setUsername("");
@@ -75,28 +75,38 @@ const AuthDetails = () => {
                         </div>
                     </MenuHandler>
                     <MenuList>
-                        <MenuItem>
-                            <NavLink to="/cart">Cart</NavLink>
-                        </MenuItem>
-                        <MenuItem>
-                            <NavLink to="/mypurchase">My Purchase</NavLink>
-                        </MenuItem>
-                        {level === "3" ? (
-                            <MenuItem className="hover:bg-gray-500">
-                                <NavLink to="/adminsettings">Admin Settings</NavLink>
+                        <NavLink to="/cart">
+                            <MenuItem>
+                                Cart
                             </MenuItem>
-                            
+                        </NavLink>
+                        <NavLink to="/mypurchase">
+                            <MenuItem>
+                                My Purchase
+                            </MenuItem>
+                        </NavLink>
+                        {level === "3" ? (
+                            <NavLink to="/adminsettings">
+                                <MenuItem className="hover:bg-gray-500">
+                                    Admin Settings
+                                </MenuItem>
+                            </NavLink>
+
                         ) : (
                             ""
                         )}
                         {(level === "2" || level === "3") ? (
+                            <NavLink to="/adminpurchasehistory">
+                                <MenuItem>
+                                    Admin Purchase History
+                                </MenuItem>
+                            </NavLink>
+                        ) : ""}
+                        <NavLink to="/settings">
                             <MenuItem>
-                                <NavLink to="/adminpurchasehistory">Admin Purchase History</NavLink>
+                                Settings
                             </MenuItem>
-                        ):""}
-                        <MenuItem>
-                            <NavLink to="/settings">Settings</NavLink>
-                        </MenuItem>
+                        </NavLink>
                         <MenuItem className="hover:bg-gray-500" onClick={userSignOut}>
                             Logout
                         </MenuItem>

@@ -9,12 +9,15 @@ import Navbar from "../templates/Navbar";
 import cart from "../icons/cart.svg";
 import { message } from "antd";
 import { v4 } from "uuid";
+import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
     const [userid, setUserId] = useState(null);
     const [totalPrice, setTotalPrice] = useState(0);
     const [cartItems, setCartItems] = useState([]);
     const [userdata, setUserData] = useState([])
+
+    const history = useNavigate()
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -219,7 +222,7 @@ export default function Cart() {
             // Provide feedback to the user
             message.success("Purchase confirmed successfully!");
 
-            window.location.reload();
+            history("/mypurchase")
 
         } catch (error) {
             console.error("Error confirming purchase:", error);
