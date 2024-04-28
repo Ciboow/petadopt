@@ -15,6 +15,7 @@ import UserSettings from "./pages/UserSettings"
 import PhoneVerification from "./templates/PhoneVerification"
 import Cart from "./pages/Cart"
 import MyPurchase from "./pages/MyPurchase"
+import AdminPurchaseHistory from "./pages/AdminPurchaseHistory"
 import "./index.css"
 
 
@@ -49,6 +50,7 @@ export default function App() {
           <Route exact path="/phoneverification" element={<PhoneVerification />} />
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/mypurchase" element={<MyPurchase />} />
+          <Route exact path="/adminpurchasehistory" element={<AdminPurchaseHistory />} />
         </Routes>
       </div>
     </Router>

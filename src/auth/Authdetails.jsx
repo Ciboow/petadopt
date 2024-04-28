@@ -89,6 +89,11 @@ const AuthDetails = () => {
                         ) : (
                             ""
                         )}
+                        {(level === "2" || level === "3") ? (
+                            <MenuItem>
+                                <NavLink to="/adminpurchasehistory">Admin Purchase History</NavLink>
+                            </MenuItem>
+                        ):""}
                         <MenuItem>
                             <NavLink to="/settings">Settings</NavLink>
                         </MenuItem>
